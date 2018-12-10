@@ -15,25 +15,13 @@ FileUtils.mkdir(day_dir) unless Dir.exist? day_dir
 end
 
 boilerplate_code = <<-CODE
+require 'pry-byebug'
+
 class Solution
   attr_reader :inputs
 
   def initialize(path)
     @inputs = File.read(path).split("\\n").compact
-  end
-
-  class << self
-    def run_part1_test
-      result = new('./test_input.txt').run_part1
-      output = (result == nil) ? 'GOOD' : "WRONG\\ngot \#{result}, expected nil"
-      puts output
-    end
-
-    def run_part2_test
-      result = new('./test_input.txt').run_part2
-      output = (result == nil) ? 'GOOD' : "WRONG\\ngot \#{result}, expected nil"
-      puts output
-    end
   end
 
   def run_part1
@@ -43,8 +31,17 @@ class Solution
   end
 end
 
-# Solution.run_part1_test
-# Solution.run_part2_test
+describe Solution do
+  it 'run_part1' do
+    s = Solution.new('./test_input.txt')
+    expect(s.run_part1).to eq(nil)
+  end
+
+  it 'run_part2' do
+    s = Solution.new('./test_input.txt')
+    expect(s.run_part2).to eq(nil)
+  end
+end
 
 # p Solution.new('./input.txt').run_part1
 # p Solution.new('./input.txt').run_part2
