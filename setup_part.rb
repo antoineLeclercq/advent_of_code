@@ -20,8 +20,8 @@ require 'pry-byebug'
 class Solution
   attr_reader :inputs
 
-  def initialize(path)
-    @inputs = File.read(path).split("\\n").compact
+  def initialize(input)
+    @inputs = input.split("\\n").compact
   end
 
   def run_part1
@@ -33,18 +33,18 @@ end
 
 describe Solution do
   it 'run_part1' do
-    s = Solution.new('./test_input.txt')
+    s = Solution.new(File.read('./test_input.txt').strip)
     expect(s.run_part1).to eq(nil)
   end
 
   it 'run_part2' do
-    s = Solution.new('./test_input.txt')
+    s = Solution.new(File.read('./test_input.txt').strip)
     expect(s.run_part2).to eq(nil)
   end
 end
 
-# p Solution.new('./input.txt').run_part1
-# p Solution.new('./input.txt').run_part2
+# p Solution.new(File.read('./input.txt').strip).run_part1
+# p Solution.new(File.read('./input.txt').strip).run_part2
 CODE
 File.write("#{day_dir}/solution.rb", boilerplate_code)
 
